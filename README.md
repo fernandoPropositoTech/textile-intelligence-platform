@@ -62,20 +62,36 @@ The project simulates a real industrial environment, from data ingestion to AI-p
 
 🟡 In Development
 
----
+### ✅ Completed
 
-## 📅 Roadmap
+- Project foundation
+- FastAPI initial setup
+- SQLAlchemy database layer
+- Alembic migrations
+- Machine data model
+- CSV ingestion with Pandas
+- Data Quality validation
+- Data transformation
+- Database persistence
+- Idempotent load strategy
+
+### 🔄 Current Data Pipeline
+
+CSV → Ingestion → Data Quality → Transformation → Upsert → SQLite---
+
+## ## 📅 Roadmap
 
 - [x] Project Planning
-- [ ] Foundation
-- [ ] Data Engineering
+- [x] Foundation
+- [x] Initial ETL Pipeline
+- [ ] Advanced Data Engineering
 - [ ] Lakehouse
 - [ ] Machine Learning
 - [ ] MLOps
 - [ ] Generative AI
-
 ---
 
 ## 👨‍💻 Author
+Fernando Caruzo
 
 Fernando Caruzo Bento
