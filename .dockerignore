@@ -1,0 +1,9 @@
+.venv
+.git
+.github
+__pycache__
+*.pyc
+.env
+textile.db
+.ipynb_checkpoints
+.pytest_cache

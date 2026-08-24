@@ -1,0 +1,32 @@
+services:
+
+  postgres:
+    image: postgres:16
+    container_name: textile_postgres
+
+    environment:
+      POSTGRES_USER: textile
+      POSTGRES_PASSWORD: textile
+      POSTGRES_DB: textile
+
+    ports:
+      - "5434:5432"
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  api:
+    build: .
+    container_name: textile_api
+
+    ports:
+      - "8001:8000"
+
+    environment:
+      DATABASE_URL: postgresql+psycopg2://textile:textile@postgres:5432/textile
+
+    depends_on:
+      - postgres
+
+volumes:
+  postgres_data:
