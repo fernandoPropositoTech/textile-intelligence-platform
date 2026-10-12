@@ -1,0 +1,8 @@
+machine_code,machine_name,manufacturer,sector,installation_date,status,hourly_capacity
+SHM-001,Shima Seiki SWG091N2,Shima Seiki,Knitting,2022-01-15,Running,120
+SHM-002,Shima Seiki MACH2XS,Shima Seiki,Knitting,2021-07-20,Running,110
+STL-001,Stoll CMS 530 HP,Stoll,Knitting,2020-03-10,Maintenance,95
+SAN-001,Santoni SM8,Santoni,Seamless,2019-11-05,Running,150
+LON-001,Lonati GOAL,Lonati,Socks,2023-05-18,Stopped,140
+SSR-001,Shima Seiki SWG091N2,Shima Seiki,Knitting,2022-01-15,Running,150
+SVS-001,Shima Seiki SWG091N2,Shima Seiki,Knitting,2022-01-15,Running,170

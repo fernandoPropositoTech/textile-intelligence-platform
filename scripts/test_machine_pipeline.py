@@ -4,7 +4,7 @@ from app.services.machine_pipeline import MachinePipeline
 pipeline = MachinePipeline()
 
 df = pipeline.run(
-    "data/raw/machines.csv"
+    "data/lake/bronze/machines.csv"
 )
 
 print(df)

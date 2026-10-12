@@ -4,6 +4,8 @@ from app.services.ingestion import DataIngestionService
 from app.services.quality import DataQualityService
 from app.services.transformation import DataTransformationService
 from app.services.machine_repository import MachineRepository
+from app.services.lake_storage import LakeStorageService
+from app.services.gold.machine_gold import MachineGoldService
 
 
 class MachinePipeline:
@@ -13,6 +15,8 @@ class MachinePipeline:
         self.quality = DataQualityService()
         self.transformation = DataTransformationService()
         self.repository = MachineRepository()
+        self.lake_storage = LakeStorageService()
+        self.gold = MachineGoldService()
 
     def run(self, file_path: str) -> pd.DataFrame:
 
@@ -62,7 +66,15 @@ class MachinePipeline:
 
         df = self.transformation.convert_hourly_capacity(df)
 
-        # 4. Load / Persistence
+        # 4. Silver Layer
+        silver_path = self.lake_storage.save_silver(
+            df,
+            "machines.csv"
+        )
+
+        print(f"Silver salva em: {silver_path}")
+
+        # 5. Load / Persistence
         result = self.repository.save_dataframe(df)
 
         print(
@@ -72,5 +84,15 @@ class MachinePipeline:
         print(
             f"Registros atualizados: {result['updated']}"
         )
+
+        # 6. Gold Layer
+        gold_df = self.gold.create_sector_summary(df)
+
+        gold_path = self.lake_storage.save_gold(
+            gold_df,
+            "machine_sector_summary.csv"
+        )
+
+        print(f"Gold salva em: {gold_path}")
 
         return df

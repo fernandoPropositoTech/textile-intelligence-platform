@@ -106,3 +106,5 @@ data/temp/
 build/
 dist/
 *.egg-info/
+# Local SQLite databases
+*.db

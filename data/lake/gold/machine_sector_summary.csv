@@ -1,0 +1,4 @@
+sector,total_machines,running_machines,maintenance_machines,stopped_machines,total_hourly_capacity,avg_hourly_capacity
+Knitting,5,4,1,0,645,129.0
+Seamless,1,1,0,0,150,150.0
+Socks,1,0,0,1,140,140.0
