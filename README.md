@@ -93,6 +93,16 @@ Database schema evolution is managed with Alembic.
 * Dockerized FastAPI application
 * Dockerized PostgreSQL database
 * Multi-container environment with Docker Compose
+  - Estruturação do Data Lake em camadas Bronze, Silver e Gold
+- Implementação da camada Bronze para armazenamento dos dados brutos
+- Implementação da camada Silver com dados tratados e validados
+- Implementação da camada Gold com indicadores agregados por setor
+- Cálculo de métricas de máquinas: quantidade, status e capacidade produtiva nominal
+- Validação dos indicadores Gold utilizando SQL no PostgreSQL
+- Integração automática das camadas Bronze → Silver → Gold ao pipeline de dados
+- Testes automatizados da camada Gold utilizando pytest
+- Validação da execução idempotente do pipeline
+- Padronização do ambiente Python 3.12 e das dependências do projeto
 
 ---
 
