@@ -139,6 +139,77 @@ Database schema evolution is managed with Alembic.
 
 ---
 
+## Arquitetura do Pipeline de Dados
+
+O **Textile Intelligence Platform (TIP)** utiliza uma arquitetura de Engenharia de Dados baseada no modelo **Medallion (Bronze, Silver e Gold)**, transformando dados operacionais da indústria têxtil em informações confiáveis para análise e tomada de decisão.
+
+### Fluxo de processamento
+
+```text
+              DADOS DA INDÚSTRIA TÊXTIL
+                         |
+                         v
+                  BRONZE LAYER
+                 Dados CSV brutos
+                         |
+                         v
+                 PYTHON + PANDAS
+                  Data Ingestion
+                         |
+                         v
+                   DATA QUALITY
+             Validação e consistência
+                         |
+                         v
+                  TRANSFORMATION
+             Normalização e tipagem
+                         |
+                         v
+                   SILVER LAYER
+               Dados limpos e tratados
+                         |
+              +----------+----------+
+              |                     |
+              v                     v
+          POSTGRESQL           GOLD LAYER
+       Persistência SQL      Agregações por setor
+              |                     |
+              v                     v
+          FASTAPI              INDICADORES
+         API REST              Quantidade de máquinas
+                               Status operacional
+                               Capacidade nominal
+```
+
+### Tecnologias utilizadas
+
+| Tecnologia | Responsabilidade |
+|---|---|
+| Python + Pandas | Ingestão, qualidade e transformação |
+| PostgreSQL | Persistência e consultas SQL |
+| SQLAlchemy | Integração Python com banco de dados |
+| Alembic | Versionamento do esquema do banco |
+| FastAPI | Disponibilização de dados via API REST |
+| Docker + Docker Compose | Conteinerização da aplicação e do banco |
+| Pytest | Testes automatizados das regras Gold |
+
+### Indicadores implementados na camada Gold
+
+A primeira tabela analítica, `machine_sector_summary`, apresenta uma linha por setor industrial, contendo:
+
+- Quantidade total de máquinas.
+- Máquinas em operação (`Running`).
+- Máquinas em manutenção (`Maintenance`).
+- Máquinas paradas (`Stopped`).
+- Capacidade horária nominal total.
+- Capacidade horária nominal média.
+
+Os indicadores foram validados por meio de agregações independentes em **Pandas e SQL/PostgreSQL**.
+
+### Próxima evolução
+
+Expansão do modelo de dados para integrar **máquinas, produção, ordens de produção, estoque, manutenção e qualidade**, preparando o TIP para processamento distribuído com PySpark, Databricks e Delta Lake.
+
 ## 👨‍💻 Author
 
 Fernando Caruzo Bento
